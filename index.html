@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <title>dp-dynamic</title>
+    </head>
+
+    <style>
+    </style>
+
+    <body>
+        <div id="imgDiv"></div>
+        <p>
+        my name is {{ajax(`/dp_dynamic/1/username`)}}
+        </p>
+    </body>
+
+<script>
+var ws = new WebSocket("ws://127.0.0.1:8080");
+
+ws.onopen = function(evt) { 
+  console.log("Connection open ..."); 
+  ws.send("Hello WebSockets!");
+};
+
+/*ws.onmessage = function(evt) {
+  console.log(evt.data);
+  console.log( "Received Message: " + evt.data);
+  ws.close();
+  };*/
+
+ws.onmessage = function(evt) {  
+    if(typeof(evt.data)=="string"){  
+        //textHandler(JSON.parse(evt.data));  
+    }else{  
+        var reader = new FileReader();  
+        reader.onload = function(evt){  
+            if(evt.target.readyState == FileReader.DONE){  
+                var url = evt.target.result;  
+                alert(url);  
+                var img = document.getElementById("imgDiv");  
+                img.innerHTML = "<img src = "+url+" />";  
+            }  
+        }  
+        reader.readAsDataURL(evt.data);  
+    }  
+};    
+
+ws.onclose = function(evt) {
+    console.log("Connection closed.");
+};
+</script>
+</html>
