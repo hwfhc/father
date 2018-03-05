@@ -3,9 +3,10 @@ const http = require('http');
 const fs = require('fs');
 const net = require('net');
 
-/*var httpServer = http.createServer(function (req, res) {
+var httpServer = http.createServer(function (req, res) {
     console.log((new Date()) + ' Received request for ' + req.url);
     res.writeHead(200, { 'Content-Type': 'text/html' });
+    console.log(req);
 
     var data = fs.readFileSync(`${__dirname}/index.html`);
     res.end(data);
@@ -46,32 +47,48 @@ wsServer.on('request', function (request) {
         else if (message.type === 'binary') {
             console.log('Received Binary Message of ' + message.binaryData.length + ' bytes');
             connection.sendBytes(message.binaryData);
-        }*//*
+        }*/
+    });
+
+    connection.on('close', function (reasonCode, description) {
+        console.log((new Date()) + ' Peer ' + connection.remoteAddress + ' disconnected.');
+    });
 });
 
-connection.on('close', function (reasonCode, description) {
-console.log((new Date()) + ' Peer ' + connection.remoteAddress + ' disconnected.');
-});
-});
-*/
-
+/*
 // Start a TCP Server
 net.createServer(function (socket) {
     // Send a nice welcome message and announce
     socket.write("Welcome " + socket.name + "\n");
 
+    var bufs = [];
+
+    var file = fs.readFileSync(`${__dirname}/logo.jpg`);
+    console.log(file);
+
     // Handle incoming messages from clients.
     socket.on('data', function (data) {
-        console.log(data);
-        fs.writeFileSync('./message.txt', data, 'utf8');
+        var str = Buffer.from(data,'base64').toString('ascii');
+        var buf = Buffer.from(str,'base64').toString('ascii');
+        console.log(buf);
+
+        fs.writeFileSync('./message.jpg', buf);
+
+        bufs.push(data);
     });
 
     // Remove the client from the list when it leaves
     socket.on('end', function () {
+        /*text = bufs[0].join();
+        var buf = Buffer.from(bufs[0], 'base64'); // Ta-da
+        console.log(buf);
         console.log('end');
-    });
+        fs.writeFileSync('./message.jpg', buf);*/
+/*    });
 }).listen(8124);
+*/
 
 // Put a friendly message on the terminal of the server.
+/*
 console.log("Chat server running at port 5000\n");
-
+*/

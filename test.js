@@ -9,11 +9,9 @@ const client = net.createConnection({ port: 8124 }, () => {
     //client.sendBytes(file);
     console.log(file);
 
-    client.write(fs.toJSON());
-});
-
-client.on('data', (data) => {
-    console.log(data.toString());
+    var b = new Buffer('sdf');
+    var s = b.toString('base64');
+    client.write(file);
     client.end();
 });
 
