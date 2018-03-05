@@ -1,101 +1,61 @@
-/*
- * 常量配置
- */
-
-var now = new Date();
-var oneDay = 24 * 3600 * 1000;
-
-/*
- * 初始化
- */
-
+var secureRate = document.getElementById("secureRate");
 var heartRate = document.getElementById("heartRate");
 var bloodOxygen = document.getElementById("bloodOxygen");
 var electrocardio = document.getElementById("electrocardio");
-var secureRate = document.getElementById("secureRate");
 
+var secureRateChart = echarts.init(secureRate);
 var heartRateChart = echarts.init(heartRate);
 var bloodOxygenChart = echarts.init(bloodOxygen);
 var electrocardioChart = echarts.init(electrocardio);
-var secureRateChart = echarts.init(secureRate);
 
-var data = [
-  {name:'2016/12/18 6:38:08', value:['2016/12/18 6:38:08', 80]},
-  {name:'2016/12/18 16:18:18', value:['2016/12/18 16:18:18', 60]},
-  {name:'2016/12/18 19:18:18', value:['2016/12/18 19:18:18', 90]},
-  {name:'2016/12/19 6:38:08', value:['2016/12/19 6:38:08', 10]},
-  {name:'2016/12/19 16:18:18', value:['2016/12/19 16:18:18', 70]},
-  {name:'2016/12/19 19:18:18', value:['2016/12/19 19:18:18', 60]}
-];
-var anchor = [
-  {name:'2016/12/18 00:00:0', value:['2016/12/18 00:00:0', 0]},
-  {name:'2016/12/19 00:00:0', value:['2016/12/19 00:00:0', 0]}
-];
-
-secureRateOption = {
-    title: {
-    text: '动态数据 + 时间坐标轴'
-  },
-  tooltip: {
-    trigger: 'axis',
-    formatter: function (params) {
-      params = params[0];
-      var date = new Date(params.name);
-      return date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + ':' + params.value[1];
-    },
-    axisPointer: {
-      animation: false
-    }
-  },
-  xAxis: {
-    type: 'time',
-    splitLine: {
-      show: false
-    }
-  },
-  yAxis: {
-    type: 'value',
-    boundaryGap: [0, '100%'],
-    splitLine: {
-      show: false
-    }
-  },
-  series: [{
-    name: '模拟数据',
-    type: 'line',
-    showSymbol: false,
-    hoverAnimation: false,
-    data: data
-  }]
-};
-/*
- * 数据生成
- */
-
+var date = [];
 var data = [];
 var value = Math.random() * 1000;
 
+//生成数据
 for (var i = 0; i < 100; i++) {
     data.push(randomData());
+    date.push('')
 }
 
-function randomData() {
-    now = new Date(+now + oneDay);
-    value += Math.random() * 10 - 5;
-    return {
-        name: now.toString(),
-        value: [
-            [now.getFullYear(), now.getMonth(), now.getDate()+1].join('/'),
-            Math.round(value)
-        ]
-    }
-}
+const secureRateOption = {
+    title: {
 
-/*
- * 图表渲染
- */
-
-var heartRateOption = {
+        text: '安全指数'
+    },
+    tooltip: {
+        trigger: 'axis',
+        formatter: function (params) {
+            params = params[0];
+            return params.value[0] + ' / ' + params.value[1];
+        },
+        axisPointer: {
+            animation: false
+        }
+    },
+    xAxis: {
+        type: 'category',
+        splitLine: {
+            show: false
+        },
+        data: date
+    },
+    yAxis: {
+        type: 'value',
+        boundaryGap: [0, '100%'],
+        splitLine: {
+            show: false
+        }
+    },
+    series: [{
+        name: '模拟数据',
+        type: 'line',
+        showSymbol: false,
+        hoverAnimation: false,
+        data: data
+    }]
+};
+const heartRateOption = {
     title: {
         text: '心率'
     },
@@ -103,18 +63,18 @@ var heartRateOption = {
         trigger: 'axis',
         formatter: function (params) {
             params = params[0];
-            var date = new Date(params.name);
-            return date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + ' : ' + params.value[1];
+            return params.value[0] + ' / ' + params.value[1];
         },
         axisPointer: {
             animation: false
         }
     },
     xAxis: {
-        type: 'time',
+        type: 'category',
         splitLine: {
             show: false
-        }
+        },
+        data: date
     },
     yAxis: {
         type: 'value',
@@ -131,7 +91,7 @@ var heartRateOption = {
         data: data
     }]
 };
-var bloodOxygenOption = {
+const bloodOxygenOption = {
     title: {
         text: '血氧'
     },
@@ -139,18 +99,18 @@ var bloodOxygenOption = {
         trigger: 'axis',
         formatter: function (params) {
             params = params[0];
-            var date = new Date(params.name);
-            return date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + ' : ' + params.value[1];
+            return params.value[0] + ' / ' + params.value[1];
         },
         axisPointer: {
             animation: false
         }
     },
     xAxis: {
-        type: 'time',
+        type: 'category',
         splitLine: {
             show: false
-        }
+        },
+        data: date
     },
     yAxis: {
         type: 'value',
@@ -167,7 +127,7 @@ var bloodOxygenOption = {
         data: data
     }]
 };
-var electrocardioOption = {
+const electrocardioOption = {
     title: {
         text: '心电'
     },
@@ -175,18 +135,18 @@ var electrocardioOption = {
         trigger: 'axis',
         formatter: function (params) {
             params = params[0];
-            var date = new Date(params.name);
-            return date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + ' : ' + params.value[1];
+            return params.value[0] + ' / ' + params.value[1];
         },
         axisPointer: {
             animation: false
         }
     },
     xAxis: {
-        type: 'time',
+        type: 'category',
         splitLine: {
             show: false
-        }
+        },
+        data: date
     },
     yAxis: {
         type: 'value',
@@ -203,71 +163,51 @@ var electrocardioOption = {
         data: data
     }]
 };
-/*var secureRateOption = {
-    title: {
-        text: '安全指数'
-    },
-    tooltip: {
-        /*trigger: 'axis',
-        formatter: function (params) {
-            params = params[0];
-            var date = new Date(params.name);
-            return date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + ' : ' + params.value[1];
-        },
-        axisPointer: {
-            animation: false
-        }
-    },
-    xAxis: {
-        type: 'value',
-        splitLine: {
-            show: false
-        },
-    },
-    yAxis: {
-        type: 'value',
-        boundaryGap: [0, '100%'],
-        splitLine: {
-            show: false
-        },
-    },
-    series: [{
-        name: '模拟数据',
-        type: 'line',
-        showSymbol: false,
-        hoverAnimation: false,
-        data: [0,1,2,3,4]
-    }]
-};
-*/
-setInterval(function () {
-    for (var i = 0; i < 1; i++) {
-        data.shift();
-        data.push(randomData());
-    }
 
+setInterval(function () {
+    var _data = randomData();
+    data.shift();
+    date.shift();
+    data.push(_data);
+    date.push(_data.value[0])
+
+    secureRateChart.setOption({
+        xAxis: {
+          data: date
+        },
+        series: [{
+            data: data
+        }]
+    });
     heartRateChart.setOption({
+        xAxis: {
+            data: date
+        },
         series: [{
             data: data
         }]
     });
     bloodOxygenChart.setOption({
+        xAxis: {
+            data: date
+        },
         series: [{
             data: data
         }]
     });
     electrocardioChart.setOption({
+        xAxis: {
+            data: date
+        },
         series: [{
             data: data
         }]
     });
-    secureRateChart.setOption({
-      series: [{
-          data: data
-      }]
-    });
 }, 1000);
 
+if (secureRateOption && typeof secureRateOption === "object") {
+    secureRateChart.setOption(secureRateOption, true);
+}
 if (heartRateOption && typeof heartRateOption === "object") {
     heartRateChart.setOption(heartRateOption, true);
 }
@@ -277,6 +217,14 @@ if (bloodOxygenOption && typeof bloodOxygenOption === "object") {
 if (electrocardioOption && typeof electrocardioOption === "object") {
     electrocardioChart.setOption(electrocardioOption, true);
 }
-if (secureRateOption && typeof secureRateOption === "object") {
-    secureRateChart.setOption(secureRateOption, true);
+
+function randomData() {
+    var now = new Date();
+    value = value + Math.random() * 21 - 10;
+    return {
+        value: [
+            [now.getHours(), now.getMinutes(), now.getSeconds()].join(':'),
+            Math.round(value)
+        ]
+    }
 }

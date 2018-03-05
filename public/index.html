@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-	<link href="test.css" type="text/css" rel="stylesheet">
+	<link href="style.css" type="text/css" rel="stylesheet">
 	<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
 	<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
 	<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
@@ -22,7 +22,13 @@
   <section class="container">
 		<h4 class="title">基本信息</h4>
 		<section class="information">
-			我是老人基本信息
+			<span>姓名:</span><input value="张万福">
+			<span>性别:</span><input value="男">
+			<span>亲属联系方式:</span><input value="165468413434">
+			<br>
+			<br>
+			<span>过往病史:</span>
+			<p>糖尿病、关节炎</p>
 		</section>
 
 		<h4 class="title">实时监控</h4>
@@ -48,24 +54,25 @@
 	</section>
 
 </body>
-
-<script type="text/javascript" src="test2.js"></script>
+<script type="text/javascript" src="chart.js"></script>
 <script>
-				var i = 1;
-        //获取canvas元素
-        var cvs = document.getElementById("cvs");
-        //创建image对象
-        var imgObj = new Image();
-        //待图片加载完后，将其显示在canvas上
-        imgObj.onload = function(){
-                var ctx = cvs.getContext('2d');
-                ctx.drawImage(this, 0, 0,1024,768);//this即是imgObj,保持图片的原始大小：470*480
-                //ctx.drawImage(this, 0, 0,1024,768);//改变图片的大小到1024*768
-            }
+	/*var i = 1;
+	//获取canvas元素
+	var cvs = document.getElementById("cvs");
+	//创建image对象
+	var imgObj = new Image();
+	//待图片加载完后，将其显示在canvas上
+	imgObj.onload = function () {
+		var ctx = cvs.getContext('2d');
+		ctx.drawImage(this, 0, 0, 1024, 768);//this即是imgObj,保持图片的原始大小：470*480
+		//ctx.drawImage(this, 0, 0,1024,768);//改变图片的大小到1024*768
+	}
 
-				setInterval(function(){
-					imgObj.src = `./${i}.jpg`;
-					i++;
-				},33);
+	setInterval(function () {
+		if (i <= 10)
+			imgObj.src = `./${i}.jpg`;
+		i++;
+	}, 33);*/
 </script>
+
 </html>
