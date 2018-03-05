@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<link href="test.css" type="text/css" rel="stylesheet">
+	<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+	<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
+	<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
+	<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
+	<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+	<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=ZUONbpqGBsYGXNIYHicvbAbM"></script>
+	<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
+	<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
+</head>
+
+<body>
+	<header>
+	   <h2>老人系统</h2>
+		 <h4>白马寺痛消贴</h4>
+	</header>
+
+  <section class="container">
+		<h4 class="title">基本信息</h4>
+		<section class="information">
+			我是老人基本信息
+		</section>
+
+		<h4 class="title">实时监控</h4>
+		<div class="video">
+			<div id="secureRate" class="big">
+			</div>
+
+			<canvas id="cvs" width="1024" height="768">
+			</canvas>
+		</div>
+
+		<h4 class="title">详细信息</h4>
+		<div class="chart">
+			<div id="heartRate" class="small">
+			</div>
+
+			<div id="bloodOxygen" class="small">
+			</div>
+
+			<div id="electrocardio" class="small">
+			</div>
+	  </div>
+	</section>
+
+</body>
+
+<script type="text/javascript" src="test2.js"></script>
+<script>
+				var i = 1;
+        //获取canvas元素
+        var cvs = document.getElementById("cvs");
+        //创建image对象
+        var imgObj = new Image();
+        //待图片加载完后，将其显示在canvas上
+        imgObj.onload = function(){
+                var ctx = cvs.getContext('2d');
+                ctx.drawImage(this, 0, 0,1024,768);//this即是imgObj,保持图片的原始大小：470*480
+                //ctx.drawImage(this, 0, 0,1024,768);//改变图片的大小到1024*768
+            }
+
+				setInterval(function(){
+					imgObj.src = `./${i}.jpg`;
+					i++;
+				},33);
+</script>
+</html>
