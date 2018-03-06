@@ -1,15 +1,22 @@
-//const WebSocketServer = require('websocket').server;
+const WebSocketServer = require('websocket').server;
 const http = require('http');
 const fs = require('fs');
 const net = require('net');
 
 var httpServer = http.createServer(function (req, res) {
     console.log((new Date()) + ' Received request for ' + req.url);
-    res.writeHead(200, { 'Content-Type': 'text/html' });
-    console.log(req);
+    console.log(req.url);
 
-    var data = fs.readFileSync(`${__dirname}/index.html`);
-    res.end(data);
+    var file = fs.readFileSync(`${__dirname}/logo.jpg`);
+    res.end(file);
+    /*if(req.url != '/') {
+        var file = fs.readFileSync(`${__dirname}/public/${req.url.replace('/','')}`);
+        res.end(file);
+    }else{
+        var data = fs.readFileSync(`${__dirname}/public/index.html`,'utf8');
+        res.writeHead(200, { 'Content-Type': 'text/html' });
+        res.end(data);
+    }*/
 });
 httpServer.listen(8080, function () {
     console.log((new Date()) + ' Server is listening on port 8080');

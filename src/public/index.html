@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<link href="/style.css" type="text/css" rel="stylesheet">
+	<script type="text/javascript" src="/echarts.min.js"></script>
+</head>
+
+<body>
+	<header>
+	   <h2>老人系统</h2>
+		 <h4>白马寺痛消贴</h4>
+	</header>
+
+  <section class="container">
+		<h4 class="title">基本信息</h4>
+		<section class="information">
+			<span>姓名:</span><input value="张万福">
+			<span>性别:</span><input value="男">
+			<span>亲属联系方式:</span><input value="165468413434">
+			<br>
+			<br>
+			<span>过往病史:</span>
+			<p>糖尿病、关节炎</p>
+		</section>
+
+		<h4 class="title">实时监控</h4>
+		<div class="video">
+			<div id="secureRate" class="big">
+			</div>
+
+            <canvas id="view" width="1024" height="768">
+            </canvas>
+		</div>
+
+		<h4 class="title">详细信息</h4>
+		<div class="chart">
+			<div id="heartRate" class="small">
+			</div>
+
+			<div id="bloodOxygen" class="small">
+			</div>
+
+			<div id="electrocardio" class="small">
+			</div>
+	  </div>
+	</section>
+
+</body>
+<script type="text/javascript" src="chart.js"></script>
+<script type="text/javascript" src="socket.js"></script>
+
+</html>
