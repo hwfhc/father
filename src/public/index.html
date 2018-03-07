@@ -1,49 +1,50 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-	<link href="/style.css" type="text/css" rel="stylesheet">
-	<script type="text/javascript" src="/echarts.min.js"></script>
+	<link href="style.css" type="text/css" rel="stylesheet">
+	<script type="text/javascript" src="echarts.min.js"></script>
 </head>
 
 <body>
 	<header>
-	   <h2>老人系统</h2>
-		 <h4>白马寺痛消贴</h4>
+	   <img src="logo.png"><span>老人安全监护系统</span>
 	</header>
 
   <section class="container">
 		<h4 class="title">基本信息</h4>
 		<section class="information">
-			<span>姓名:</span><input value="张万福">
-			<span>性别:</span><input value="男">
-			<span>亲属联系方式:</span><input value="165468413434">
-			<br>
-			<br>
-			<span>过往病史:</span>
-			<p>糖尿病、关节炎</p>
+			<span class="type">姓名:</span><span class="data">张万福</span>
+			<span class="type">性别:</span><span class="data">男</span>
+			<span class="type">亲属联系方式:</span><span class="data">165468413434</span>
+			<div>
+				<span class="type">过往病史:</span>
+				<p>糖尿病、关节炎</p>
+			</div>
 		</section>
 
-		<h4 class="title">实时监控</h4>
+		<h4 class="title" style="border-top: 2px solid #cccccc;">实时监控</h4>
 		<div class="video">
-			<div id="secureRate" class="big">
+			<div id="secureRate" class="bigChart">
 			</div>
 
-            <canvas id="view" width="1024" height="768">
-            </canvas>
+      <canvas id="view" width="512" height="370">
+      </canvas>
 		</div>
 
-		<h4 class="title">详细信息</h4>
+		<h4 class="title" style="border-top: 2px solid #cccccc;">详细信息</h4>
 		<div class="chart">
-			<div id="heartRate" class="small">
+			<div id="heartRate" style="border-right:1px solid #dddddd" class="smallChart">
 			</div>
 
-			<div id="bloodOxygen" class="small">
+			<div id="bloodOxygen" style="border-right:1px solid #dddddd" class="smallChart">
 			</div>
 
-			<div id="electrocardio" class="small">
+			<div id="electrocardio" class="smallChart">
 			</div>
 	  </div>
 	</section>
+
+	<footer></footer>
 
 </body>
 <script type="text/javascript" src="chart.js"></script>

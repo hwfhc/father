@@ -3,7 +3,7 @@
 }
 
 body{
-  background-color: #f9fafb;
+  background-color: #eaf3f8;
 }
 
 h2,h4{
@@ -12,39 +12,69 @@ h2,h4{
 
 header{
   margin-bottom: 20px;
-  padding: 5px 20px;
+  padding: 5px 5%;
 
-  border: 1px solid #d5d6d7;
-  box-shadow: 0 0 10px #888888;
+  background-color: #a7d3a0;
+  border: 1px solid #8de53f;
+  box-shadow: 0 0 10px #8de53f;
+}
+
+header img{
+  height: 50px;
+}
+
+header span{
+  margin-left: 25px;
+  color: white;
+  font-size: 50px;
 }
 
 .title{
+  padding-top: 20px;
+
+  color: #3e8d0a;
+  font-size: 32px;
   margin: 20px 0 10px 0;
 }
 
+.container{
+  margin: 10px 10%;
+}
+
 .information{
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   padding: 15px 10px;
+
+  background-color: white;
 
   border: 1px solid #d5d6d7;
   box-shadow: 0 0 10px #888888;
 }
 
-.information span{
+.information .type{
   padding-right: 10px;
   font-size: 20px;
 }
 
-.information input{
+.information .data{
+  display: inline-block;
+
+  border: 1px solid #446b2a;
+  border-radius: 10px;
+  min-width: 50px;
+
   margin-right: 20px;
   padding: 5px;
 }
 
-.container{
-  margin: 10px 20px;
+.information div{
+  margin-top: 20px;
+  padding: 20px 0 10px 0;
+  border-top: 1px solid #dddddd;
 }
 
 .video{
+  width:100%;
   border: 1px solid #d5d6d7;
   box-shadow: 0 0 10px #888888;
 
@@ -53,31 +83,40 @@ header{
   background-color: white;
 
   padding: 5px;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
-.chart{
-  border: 1px solid #d5d6d7;
-  box-shadow: 0 0 10px #888888;
-
-  display: flex;
-  justify-content: space-between;
-}
-
-.small{
-  height: 370px;
-  width: 32%;
-  margin: 0px 0;
-
-  display: inline-block;
-}
-
-.big{
+.bigChart{
   height: 370px;
   width: 40%;
 }
 
 #cvs{
-  width: 40%;
-  height: 100%;
+  width: 512px;
+  height: 370px;
+}
+
+.chart{
+  border: 1px solid #d5d6d7;
+  box-shadow: 0 0 10px #888888;
+  background-color: white;
+
+  padding: 30px 20px;
+  margin-bottom: 50px;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.smallChart{
+  height: 370px;
+  width: 32%;
+  margin: 0;
+
+  display: inline-block;
+}
+
+footer{
+  background-color: #60655c;
+  height: 100px;
 }
