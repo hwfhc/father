@@ -9,12 +9,45 @@ var bloodOxygenChart = echarts.init(bloodOxygen);
 var electrocardioChart = echarts.init(electrocardio);
 
 var date = [];
-var data = [];
-var value = Math.random() * 1000;
+var dataOfSecureRateOption = [];
+var dataOfHeartRate = [];
+var dataOfBloodOxygen = [];
+var dataOfElectrocardio = [];
+
+var valueOfSecureRate = 100;
+var valueOfHeartRate = 80;
+var valueOfBloodOxygen = 98;
+var valueOfElectrocardio = 1000;
+
 
 //生成数据
-for (var i = 0; i < 100; i++) {
-    data.push(randomData());
+for(var i=0;i<1000;i++){
+    var now = new Date();
+
+    dataOfSecureRateOption.push({
+        value:[
+            [now.getHours(), now.getMinutes(), now.getSeconds()].join(':'),
+            randomDataOfSecureRate()
+        ]
+    });
+    dataOfHeartRate.push({
+        value:[
+            [now.getHours(), now.getMinutes(), now.getSeconds()].join(':'),
+            randomDataOfHeartRate(),
+        ]
+    });
+    dataOfBloodOxygen.push({
+        value:[
+            [now.getHours(), now.getMinutes(), now.getSeconds()].join(':'),
+            randomDataOfBloodOxygen(),
+        ]
+    });
+    dataOfElectrocardio.push({
+        value:[
+            [now.getHours(), now.getMinutes(), now.getSeconds()].join(':'),
+            randomDataOfElectrocardio()
+        ]
+    });
     date.push('')
 }
 
@@ -52,7 +85,7 @@ const secureRateOption = {
         type: 'line',
         showSymbol: false,
         hoverAnimation: false,
-        data: data
+        data: dataOfSecureRateOption
     }]
 };
 const heartRateOption = {
@@ -88,7 +121,7 @@ const heartRateOption = {
         type: 'line',
         showSymbol: false,
         hoverAnimation: false,
-        data: data
+        data: dataOfHeartRate
     }]
 };
 const bloodOxygenOption = {
@@ -124,7 +157,7 @@ const bloodOxygenOption = {
         type: 'line',
         showSymbol: false,
         hoverAnimation: false,
-        data: data
+        data: dataOfBloodOxygen
     }]
 };
 const electrocardioOption = {
@@ -160,23 +193,56 @@ const electrocardioOption = {
         type: 'line',
         showSymbol: false,
         hoverAnimation: false,
-        data: data
+        data: dataOfElectrocardio
     }]
 };
 
 setInterval(function () {
-    var _data = randomData();
-    data.shift();
+    var now = new Date();
+
+    var newDate =  [now.getHours(), now.getMinutes(), now.getSeconds()].join(':');
     date.shift();
-    data.push(_data);
-    date.push(_data.value[0])
+    date.push(newDate)
+
+    dataOfSecureRateOption.shift();
+    dataOfHeartRate.shift();
+    dataOfBloodOxygen.shift();
+    dataOfElectrocardio.shift();
+
+    var newData = randomDataOfSecureRate();
+    dataOfSecureRateOption.push({
+        value: [
+            newDate,newData
+        ]
+    });
+
+    var newData = randomDataOfHeartRate();
+    dataOfHeartRate.push({
+        value: [
+            newDate,newData
+        ]
+    });
+
+    var newData = randomDataOfBloodOxygen();
+    dataOfBloodOxygen.push({
+        value: [
+            newDate,newData
+        ]
+    });
+
+    var newData = randomDataOfElectrocardio();
+    dataOfElectrocardio.push({
+        value: [
+            newDate,newData
+        ]
+    });
 
     secureRateChart.setOption({
         xAxis: {
           data: date
         },
         series: [{
-            data: data
+            data: dataOfSecureRateOption
         }]
     });
     heartRateChart.setOption({
@@ -184,7 +250,7 @@ setInterval(function () {
             data: date
         },
         series: [{
-            data: data
+            data: dataOfHeartRate
         }]
     });
     bloodOxygenChart.setOption({
@@ -192,7 +258,7 @@ setInterval(function () {
             data: date
         },
         series: [{
-            data: data
+            data: dataOfBloodOxygen
         }]
     });
     electrocardioChart.setOption({
@@ -200,7 +266,7 @@ setInterval(function () {
             data: date
         },
         series: [{
-            data: data
+            data: dataOfElectrocardio
         }]
     });
 }, 1000);
@@ -218,13 +284,20 @@ if (electrocardioOption && typeof electrocardioOption === "object") {
     electrocardioChart.setOption(electrocardioOption, true);
 }
 
-function randomData() {
-    var now = new Date();
-    value = value + Math.random() * 21 - 10;
-    return {
-        value: [
-            [now.getHours(), now.getMinutes(), now.getSeconds()].join(':'),
-            Math.round(value)
-        ]
-    }
+function randomDataOfSecureRate() {
+    valueOfSecureRate += Math.random() * 2 - 1;
+    return Math.round(valueOfSecureRate);
 }
+function randomDataOfHeartRate() {
+    valueOfHeartRate += Math.random() * 2 - 1;
+    return Math.round(valueOfHeartRate);
+}
+function randomDataOfBloodOxygen() {
+    valueOfBloodOxygen += Math.random() * 2 - 1;
+    return Math.round(valueOfBloodOxygen);
+}
+function randomDataOfElectrocardio() {
+    valueOfElectrocardio += Math.random() * 2 - 1;
+    return Math.round(valueOfElectrocardio);
+}
+

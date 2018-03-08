@@ -26,7 +26,7 @@ wsServer.on('request', function (request) {
     var connection = request.accept(null, request.origin);
     console.log((new Date()) + ' Connection accepted.');
 
-    setInterval(handler,500);
+    setInterval(handler,50);
 
     connection.on('close', function (reasonCode, description) {
         console.log((new Date()) + ' Peer ' + connection.remoteAddress + ' disconnected.');
